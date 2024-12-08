@@ -1,0 +1,39 @@
+#######################################################################################################################
+#                                                                                                                     #
+#                                               Gradle Version Catalogs                                               #
+#                                                         ~                                                           #
+#                              https://docs.gradle.org/current/userguide/version_catalogs.html                        #
+#                                                                                                                     #
+#######################################################################################################################
+
+[versions] # Section Versions ~ Declares version identifiers.
+springboot_version = "3.4.0"              # https://github.com/spring-projects/spring-boot
+springcloud_version = "2023.0.2"          # https://github.com/spring-cloud
+spring_dep_management_version = "1.1.6"   # https://github.com/spring-gradle-plugins/dependency-management-plugin
+jetbrains_annotations_version = "26.0.1"  # https://github.com/JetBrains/java-annotations
+junit_version = "5.11.3"                  # https://github.com/junit-team/junit5
+mockito_version = "5.+"                   # https://github.com/mockito/mockito
+lombok_version = "1.18.36"                # https://github.com/projectlombok/lombok
+postgresql_version = "42.7.4"             # https://github.com/postgres/postgres
+h2db_version = "2.3.232"                  # https://github.com/h2database/h2database
+cadixdev_licenser_version = "0.6.1"       # https://github.com/CadixDev/licenser
+
+[libraries] # Section Libraries ~ Maps aliases to GAV coordinates.
+jetbrains_annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains_annotations_version" }
+junit_jupiter_api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit_version" }
+junit_jupiter_params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit_version" }
+junit_jupiter_engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit_version" }
+mockito_core = { module = "org.mockito:mockito-core", version.ref = "mockito_version" }
+mockito_inline = { module = "org.mockito:mockito-inline", version.ref = "mockito_version" }
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok_version" }
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql_version" }
+h2db = { module = "com.h2database:h2", version.ref = "h2db_version" }
+
+[bundles] # Section Bundles ~ Defines dependency bundles.
+junit = ["junit_jupiter_api", "junit_jupiter_params"]
+mockito = ["mockito_core", "mockito_inline"]
+
+[plugins] # Section Plugin ~ Declares plugin versions.
+springframework_boot = { id = "org.springframework.boot", version.ref = "springboot_version" }
+springframework_depManagement = { id = "io.spring.dependency-management", version.ref = "spring_dep_management_version" }
+cadixdev_licenser = { id = "org.cadixdev.licenser", version.ref = "cadixdev_licenser_version" }
