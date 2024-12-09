@@ -22,47 +22,56 @@
  * SOFTWARE.
  */
 
-package com.github.tmslpm.hsla.dal.repository;
+package com.github.tmslpm.hsla.bll.service;
 
+import com.github.tmslpm.hsla.bll.dto.UserCreateDTO;
 import com.github.tmslpm.hsla.dal.entity.UserEntity;
+import com.github.tmslpm.hsla.dal.repository.IUserRepository;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest()
 @TestPropertySource(locations = "classpath:application.test.properties")
-class IUserRepositoryTest {
-
+class UserServiceTest {
   @Autowired
+  UserService service;
+
+  @MockitoBean
   IUserRepository repository;
 
   @BeforeEach
   void onBeforeEach() {
-    this.repository.deleteAll();
   }
 
   @Test
-  void test_find_by_username() {
-    repository.save(new UserEntity("test-john41268"));
-    assertTrue(repository.findByName("test-john41268").isPresent());
-  }
+  void test_create_user_with_valid_data() {
+    // mock repository
+    when(this.repository.save(any(UserEntity.class)))
+      .thenReturn(new UserEntity("john123"));
 
-  @Test
-  void test_user_entity_audit_fields_are_initialized() {
-    // test setup
-    repository.save(new UserEntity("test"));
-    assertTrue(repository.findByName("test").isPresent());
+    // create (save) entity
+    final UserEntity user = this.service.create(UserCreateDTO.builder()
+      .name("john123")
+      .build());
 
     // test
-    UserEntity savedUser = repository.findByName("test").get();
-    assertNotNull(savedUser.getCreatedAt());
-    assertNotNull(savedUser.getUpdatedAt());
-    assertTrue(savedUser.isActive());
+    assertNotNull(user);
+    assertEquals("john123", user.getName());
+  }
+
+  @Test
+  void test_create_user_with_invalid_name() {
+    UserCreateDTO invalidUser = UserCreateDTO.builder().build();
+    assertThrows(ConstraintViolationException.class, () -> service.create(invalidUser));
   }
 
 }

@@ -22,17 +22,19 @@
  * SOFTWARE.
  */
 
-package com.github.tmslpm.hsla.dal;
+package com.github.tmslpm.hsla.bll.dto;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import lombok.Builder;
+import lombok.Data;
 
-public interface Config {
+@Data
+@Builder
+public class UserCreateDTO {
 
-  @Configuration
-  @EnableJpaAuditing
-  @SuppressWarnings("unused")
-  class ConfigJPA {
-  }
+  @NotEmpty(message = "The user name cannot be empty.")
+  @Size(min = 3, max = 50, message = "The user name must be between 3 and 50 characters long.")
+  private String name;
 
 }

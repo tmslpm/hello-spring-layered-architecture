@@ -22,10 +22,39 @@
  * SOFTWARE.
  */
 
-package com.github.tmslpm.hsla.bll;
+package com.github.tmslpm.hsla.bll.service;
 
+import com.github.tmslpm.hsla.bll.dto.UserCreateDTO;
+import com.github.tmslpm.hsla.dal.entity.UserEntity;
+import com.github.tmslpm.hsla.dal.repository.IUserRepository;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
+@Validated
+@AllArgsConstructor
 public class UserService {
+
+  private final IUserRepository userRepository;
+
+  @Transactional
+  public UserEntity create(@Valid @NotNull UserCreateDTO userDto) {
+    return userRepository.save(new UserEntity(userDto.getName()));
+  }
+
+  public Optional<UserEntity> findByName(String username) {
+    return userRepository.findByName(username);
+  }
+
+  public List<UserEntity> findAll() {
+    return userRepository.findAll();
+  }
+
 }

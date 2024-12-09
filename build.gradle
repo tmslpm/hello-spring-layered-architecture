@@ -35,7 +35,7 @@ subprojects {
         //   │   │   //
         //   ▼  ---  //
       case 'pl':
-        api project(":src:dal")
+        api project(":src:bll")
         testImplementation project(":src:app")
         break
         //  ---  ▲   //

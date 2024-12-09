@@ -36,4 +36,5 @@ public class IndexController {
   String index() {
     return "index";
   }
+
 }
