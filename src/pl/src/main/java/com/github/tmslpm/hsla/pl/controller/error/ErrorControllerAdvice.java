@@ -1,4 +1,4 @@
-package com.github.tmslpm.hsla.pl.controller;
+package com.github.tmslpm.hsla.pl.controller.error;
 
 import com.github.tmslpm.hsla.bll.exception.UserNotFoundException;
 import com.github.tmslpm.hsla.pl.dto.ApiErrorDTO;
