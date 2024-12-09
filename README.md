@@ -1,5 +1,18 @@
 # Hello Spring Layered Architecture
 
+- run
+
+````
+gradlew :src:app:bootRun
+````
+
+- build
+
+````
+gradlew :src:app:bootJar
+````
+> output build: `./src/app/build/libs/{rootProject.name}-app-{version}.jar`
+
 ## Project Structure
 
 ### project root
@@ -67,9 +80,6 @@ root
    │                           │  
    └───────────────────────────┘              
 ```
-
-
-
 
 ## Project Dependency Management
 
