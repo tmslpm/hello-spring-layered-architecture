@@ -73,22 +73,10 @@ root
 
 ## Project Dependency Management
 
-The project use the feature Gradle's **Versions Catalog** feature to manage its
-dependencies in a centralized and efficient way.
- 
-### Dependency Management Flow
+The project uses Gradle's **Versions Catalog** functionality
+to manage its dependency versions centrally and efficiently.
 
-- **`app`** subproject:
-  The central hub for all dependency declarations.
-- **`dal`, `bll`, `pl`** subprojects:
-  These layers inherit the dependencies from the **`app`** subproject, ensuring
-  consistency across the entire application.
+This ensures consistency and avoids version conflicts.
 
-By using the Versions Catalog feature, this project achieves a clean and manageable structure,
-where dependencies are easily maintained and updated in one place.
-
-For the versions catalog, see the `libs.versions.toml` file located in the `./gradle/libs.versions.toml`
-directory.
-
-This file centralizes the versions of dependencies used across the project, helping to maintain
-consistency and avoid version conflicts.
+For the versions catalog file, see the `libs.versions.toml` file located in the 
+`./gradle/libs.versions.toml` directory. 
