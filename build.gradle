@@ -36,17 +36,21 @@ subprojects {
         //   ▼  ---  //
       case 'pl':
         api project(":src:dal")
+        testImplementation project(":src:app")
         break
         //  ---  ▲   //
         //   │   │   //
         //   ▼  ---  //
       case 'bll':
         api project(":src:dal")
+        testImplementation project(":src:app")
         break
         //  ---  ▲   //
         //   │   │   //
         //   ▼  ---  //
-      case 'dal': break
+      case 'dal':
+        testImplementation project(":src:app")
+        break
       default: break
     }
   }
