@@ -20,11 +20,10 @@ class ErrorControllerAdviceTest {
   MockMvc mockMvc;
 
   @Test
-  void whenGeneralException_thenReturnApiError() throws Exception {
-    mockMvc.perform(get("/trigger-general-error"))
-      .andExpect(status().isInternalServerError())
-      .andExpect(jsonPath("$.status").value("INTERNAL_SERVER_ERROR"))
-      .andExpect(jsonPath("$.message").value("Ouch! An unexpected error has occurred."))
+  void test_not_found_user_exception_handle() throws Exception {
+    mockMvc.perform(get("/v1/users/get/nonexistent"))
+      .andExpect(status().isNotFound())
+      .andExpect(jsonPath("$.status").value("NOT_FOUND"))
       .andExpect(jsonPath("$.timestamp").exists());
   }
 
