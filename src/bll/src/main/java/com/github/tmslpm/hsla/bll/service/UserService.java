@@ -26,6 +26,7 @@ package com.github.tmslpm.hsla.bll.service;
 
 import com.github.tmslpm.hsla.bll.dto.UserCreateDTO;
 import com.github.tmslpm.hsla.bll.dto.UserDTO;
+import com.github.tmslpm.hsla.bll.exception.UserNotFoundException;
 import com.github.tmslpm.hsla.bll.mapper.UserMapper;
 import com.github.tmslpm.hsla.dal.entity.UserEntity;
 import com.github.tmslpm.hsla.dal.repository.IUserRepository;
@@ -37,7 +38,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,10 +54,14 @@ public class UserService {
       .save(new UserEntity(userDto.name())));
   }
 
-  public Optional<UserDTO> findByName(String username) {
+  public UserDTO findByName(String username) {
     return userRepository
       .findByName(username)
-      .map(userMapper::toDTO);
+      .map(userMapper::toDTO)
+      .orElseThrow(() -> UserNotFoundException
+        .builder()
+        .username(username)
+        .build());
   }
 
   public List<UserDTO> findAll() {

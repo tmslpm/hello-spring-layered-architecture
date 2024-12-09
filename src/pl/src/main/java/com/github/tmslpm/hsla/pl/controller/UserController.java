@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.github.tmslpm.hsla.pl;
+package com.github.tmslpm.hsla.pl.controller;
 
 import com.github.tmslpm.hsla.bll.dto.UserCreateDTO;
 import com.github.tmslpm.hsla.bll.dto.UserDTO;
@@ -57,9 +57,8 @@ public class UserController {
 
   @GetMapping("/get/{name}")
   public ResponseEntity<UserDTO> get(@PathVariable String name) {
-    return userService.findByName(name)
-      .map(userEntity -> new ResponseEntity<>(userEntity, HttpStatus.OK))
-      .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    final UserDTO user = userService.findByName(name);
+    return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
 }
