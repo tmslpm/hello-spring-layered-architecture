@@ -1,5 +1,4 @@
 plugins {
-  id 'java'
   id 'java-library'
   id 'project-setup' apply false
   alias libs.plugins.cadixdev.licenser
@@ -11,7 +10,6 @@ group = 'com.github.tmslpm.hsla'
 version = '1.0.0'
 
 subprojects {
-  apply plugin: 'java'
   apply plugin: 'java-library'
   apply plugin: 'project-setup'
   apply plugin: libs.plugins.springframework.boot.get().pluginId
@@ -56,4 +54,5 @@ subprojects {
   license {
     header = project.rootProject.file('license.md')
   }
+
 }
