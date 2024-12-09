@@ -22,43 +22,26 @@
  * SOFTWARE.
  */
 
-package com.github.tmslpm.hsla.pl.controller;
+package com.github.tmslpm.hsla.pl.controller.index;
 
-import com.github.tmslpm.hsla.bll.dto.UserCreateDTO;
-import com.github.tmslpm.hsla.bll.dto.UserDTO;
-import com.github.tmslpm.hsla.bll.service.UserService;
+import com.github.tmslpm.hsla.pl.dto.ApiSimpleMessageDTO;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/users")
+@RequestMapping("/")
 @AllArgsConstructor
 @SuppressWarnings("unused")
-public class UserController {
+public class IndexController {
+  private final IndexAssembler assembler;
 
-  private final UserService userService;
-
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<UserDTO> createUser(@RequestBody UserCreateDTO userCreateDTO) {
-    UserDTO createdUser = userService.create(userCreateDTO);
-    return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-  }
-
-  @GetMapping("/all")
-  public ResponseEntity<List<UserDTO>> getAll() {
-    List<UserDTO> users = userService.findAll();
-    return new ResponseEntity<>(users, HttpStatus.OK);
-  }
-
-  @GetMapping("/get/{name}")
-  public ResponseEntity<UserDTO> get(@PathVariable String name) {
-    final UserDTO user = userService.findByName(name);
-    return new ResponseEntity<>(user, HttpStatus.OK);
+  @GetMapping(value = {"index", "index.html", "home.html", "home"})
+  public ResponseEntity<EntityModel<ApiSimpleMessageDTO>> index() {
+    return ResponseEntity.ok(assembler.toModel("Hello World!"));
   }
 
 }
