@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.github.tmslpm.hsla.pl;
+package com.github.tmslpm.hsla.pl.controller;
 
 import com.github.tmslpm.hsla.bll.dto.UserCreateDTO;
 import com.github.tmslpm.hsla.bll.dto.UserDTO;
