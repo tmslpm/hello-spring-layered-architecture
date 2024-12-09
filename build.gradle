@@ -29,13 +29,17 @@ subprojects {
     switch (name) {
       case 'app':
         implementation project(":src:pl")
+        implementation project(":src:bll")
+        implementation project(":src:dal")
         break
         //   A P P   //
         //  ---  ▲   //
         //   │   │   //
         //   ▼  ---  //
       case 'pl':
-        api project(":src:bll")
+        api(project(":src:bll")) {
+          exclude group: project(":src:dal").group.toString()
+        }
         testImplementation project(":src:app")
         break
         //  ---  ▲   //

@@ -22,16 +22,17 @@
  * SOFTWARE.
  */
 
-package com.github.tmslpm.hsla.bll.dto;
+package com.github.tmslpm.hsla.bll.mapper;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
-import lombok.Builder;
+import com.github.tmslpm.hsla.bll.dto.UserDTO;
+import com.github.tmslpm.hsla.dal.entity.UserEntity;
+import org.mapstruct.Mapper;
 
-@Builder
-public record UserCreateDTO(
-  @NotEmpty(message = "The user name cannot be empty.")
-  @Size(min = 3, max = 50, message = "The user name must be between 3 and 50 characters long.")
-  String name
-) {
+@Mapper(componentModel = "spring")
+public interface UserMapper {
+
+  UserDTO toDTO(UserEntity userEntity);
+
+  UserEntity toEntity(UserDTO userDTO);
+
 }

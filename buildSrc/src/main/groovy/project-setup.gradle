@@ -26,6 +26,11 @@ dependencies {
   testCompileOnly libs.lombok
   testAnnotationProcessor libs.lombok
 
+  // mapstruct
+  implementation libs.mapstruct
+  annotationProcessor libs.mapstructprocessor
+  testAnnotationProcessor libs.mapstructprocessor
+
   // Postgresql
   implementation libs.postgresql
 }

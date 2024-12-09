@@ -25,6 +25,8 @@
 package com.github.tmslpm.hsla.bll.service;
 
 import com.github.tmslpm.hsla.bll.dto.UserCreateDTO;
+import com.github.tmslpm.hsla.bll.dto.UserDTO;
+import com.github.tmslpm.hsla.bll.mapper.UserMapper;
 import com.github.tmslpm.hsla.dal.entity.UserEntity;
 import com.github.tmslpm.hsla.dal.repository.IUserRepository;
 import jakarta.transaction.Transactional;
@@ -36,6 +38,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Validated
@@ -43,18 +46,26 @@ import java.util.Optional;
 public class UserService {
 
   private final IUserRepository userRepository;
+  private final UserMapper userMapper;
 
   @Transactional
-  public UserEntity create(@Valid @NotNull UserCreateDTO userDto) {
-    return userRepository.save(new UserEntity(userDto.getName()));
+  public UserDTO create(@Valid @NotNull UserCreateDTO userDto) {
+    return userMapper.toDTO(userRepository
+      .save(new UserEntity(userDto.name())));
   }
 
-  public Optional<UserEntity> findByName(String username) {
-    return userRepository.findByName(username);
+  public Optional<UserDTO> findByName(String username) {
+    return userRepository
+      .findByName(username)
+      .map(userMapper::toDTO);
   }
 
-  public List<UserEntity> findAll() {
-    return userRepository.findAll();
+  public List<UserDTO> findAll() {
+    return userRepository
+      .findAll()
+      .stream()
+      .map(userMapper::toDTO)
+      .collect(Collectors.toList());
   }
 
 }

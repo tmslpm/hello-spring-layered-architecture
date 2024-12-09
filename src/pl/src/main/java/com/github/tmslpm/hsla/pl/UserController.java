@@ -25,8 +25,8 @@
 package com.github.tmslpm.hsla.pl;
 
 import com.github.tmslpm.hsla.bll.dto.UserCreateDTO;
+import com.github.tmslpm.hsla.bll.dto.UserDTO;
 import com.github.tmslpm.hsla.bll.service.UserService;
-import com.github.tmslpm.hsla.dal.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -44,19 +44,19 @@ public class UserController {
   private final UserService userService;
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<UserEntity> createUser(@RequestBody UserCreateDTO userCreateDTO) {
-    UserEntity createdUser = userService.create(userCreateDTO);
+  public ResponseEntity<UserDTO> createUser(@RequestBody UserCreateDTO userCreateDTO) {
+    UserDTO createdUser = userService.create(userCreateDTO);
     return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
   }
 
   @GetMapping("/all")
-  public ResponseEntity<List<UserEntity>> getAll() {
-    List<UserEntity> users = userService.findAll();
+  public ResponseEntity<List<UserDTO>> getAll() {
+    List<UserDTO> users = userService.findAll();
     return new ResponseEntity<>(users, HttpStatus.OK);
   }
 
   @GetMapping("/get/{name}")
-  public ResponseEntity<UserEntity> get(@PathVariable String name) {
+  public ResponseEntity<UserDTO> get(@PathVariable String name) {
     return userService.findByName(name)
       .map(userEntity -> new ResponseEntity<>(userEntity, HttpStatus.OK))
       .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));

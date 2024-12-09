@@ -24,14 +24,12 @@
 
 package com.github.tmslpm.hsla.bll.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
 @Builder
-public record UserCreateDTO(
-  @NotEmpty(message = "The user name cannot be empty.")
-  @Size(min = 3, max = 50, message = "The user name must be between 3 and 50 characters long.")
+public record UserDTO(
+  Long id,
   String name
 ) {
+
 }

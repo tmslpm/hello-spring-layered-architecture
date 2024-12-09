@@ -25,6 +25,7 @@
 package com.github.tmslpm.hsla.bll.service;
 
 import com.github.tmslpm.hsla.bll.dto.UserCreateDTO;
+import com.github.tmslpm.hsla.bll.dto.UserDTO;
 import com.github.tmslpm.hsla.dal.entity.UserEntity;
 import com.github.tmslpm.hsla.dal.repository.IUserRepository;
 import jakarta.validation.ConstraintViolationException;
@@ -59,13 +60,13 @@ class UserServiceTest {
       .thenReturn(new UserEntity("john123"));
 
     // create (save) entity
-    final UserEntity user = this.service.create(UserCreateDTO.builder()
+    final UserDTO user = this.service.create(UserCreateDTO.builder()
       .name("john123")
       .build());
 
     // test
     assertNotNull(user);
-    assertEquals("john123", user.getName());
+    assertEquals("john123", user.name());
   }
 
   @Test
