@@ -75,23 +75,7 @@ root
 
 The project use the feature Gradle's **Versions Catalog** feature to manage its
 dependencies in a centralized and efficient way.
-
-### Centralized Dependency Declaration
-
-In this project, the **`app`** subproject is responsible for declaring the dependencies.
-It serves as the main entry point of the application and contains all the essential
-dependencies needed for the project to run. These dependencies are declared within the
-**`dependencies`** block of the `build.gradle` file in the **`app`** subproject.
-
-### Inheritance of Dependencies
-
-The other subprojects, namely **`dal`** (Data Access Layer), **`bll`** (Business Logic Layer),
-and **`pl`** (Presentation Layer), inherit the dependencies declared in the **`app`** subproject.
-By configuring the dependencies in the root **`app`** subproject, all other subprojects can
-access these dependencies without having to explicitly declare them.
-
-Each subproject can inherit the necessary dependencies.
-
+ 
 ### Dependency Management Flow
 
 - **`app`** subproject:
