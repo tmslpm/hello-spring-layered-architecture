@@ -6,3 +6,7 @@ pluginManagement {
 }
 
 rootProject.name = 'hello-spring-layered-architecture'
+include ':src:app'
+include ':src:bll'
+include ':src:dal'
+include ':src:pl'

@@ -1,0 +1,15 @@
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-actuator'
+}
+
+processResources {
+  from project(":src:bll").sourceSets.main.resources
+  from project(":src:dal").sourceSets.main.resources
+  from project(":src:pl").sourceSets.main.resources
+}
+
+tasks.withType(JavaCompile) {
+  source(project(":src:bll").sourceSets.main.allSource)
+  source(project(":src:dal").sourceSets.main.allSource)
+  source(project(":src:pl").sourceSets.main.allSource)
+}

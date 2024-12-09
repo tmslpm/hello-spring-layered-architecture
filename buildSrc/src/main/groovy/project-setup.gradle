@@ -1,0 +1,52 @@
+plugins {
+  id 'java'
+
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation libs.jetbrains.annotations
+
+  // junit
+  testImplementation libs.bundles.junit
+  testRuntimeOnly libs.junit.jupiter.engine
+
+  // mockito
+  testImplementation libs.bundles.mockito
+
+  // H2database (used during junit test)
+  testImplementation libs.h2db
+
+  // lombok
+  compileOnly libs.lombok
+  annotationProcessor libs.lombok
+  testCompileOnly libs.lombok
+  testAnnotationProcessor libs.lombok
+
+  // Postgresql
+  implementation libs.postgresql
+}
+
+test {
+  useJUnitPlatform()
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(libs.versions.javaToolchainVersion.get())
+  }
+  sourceCompatibility = libs.versions.javaTargetCompatibility.get()
+}
+
+tasks.withType(JavaCompile).configureEach {
+  it.options.encoding = 'UTF-8'
+  it.options.release.set(libs.versions.javaTargetCompatibility.get().toInteger())
+}
+
+tasks.withType(GenerateModuleMetadata).configureEach {
+  enabled = false
+}
+

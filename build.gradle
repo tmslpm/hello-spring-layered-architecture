@@ -1,68 +1,55 @@
 plugins {
   id 'java'
-  alias libs.plugins.springframework.boot
-  alias libs.plugins.springframework.depManagement
+  id 'java-library'
+  id 'project-setup' apply false
   alias libs.plugins.cadixdev.licenser
+  alias libs.plugins.springframework.boot apply false
+  alias libs.plugins.springframework.depManagement apply false
 }
 
-group = 'org.example'
+group = 'com.github.tmslpm.hsla'
 version = '1.0.0'
 
-repositories {
-  mavenCentral()
-}
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'java-library'
+  apply plugin: 'project-setup'
+  apply plugin: libs.plugins.springframework.boot.get().pluginId
+  apply plugin: libs.plugins.springframework.depManagement.get().pluginId
+  apply plugin: libs.plugins.cadixdev.licenser.get().pluginId
 
-dependencies {
-  implementation libs.jetbrains.annotations
+  group = "${rootProject.group}.$name"
+  version = rootProject.version
 
-  // junit
-  testImplementation libs.bundles.junit
-  testRuntimeOnly libs.junit.jupiter.engine
-
-  // mockito
-  testImplementation libs.bundles.mockito
-
-  // lombok
-  compileOnly libs.lombok
-  annotationProcessor libs.lombok
-  testCompileOnly libs.lombok
-  testAnnotationProcessor libs.lombok
-
-  // Spring
-  implementation libs.postgresql
-  testImplementation libs.h2db // h2 database is used during the test
-  testImplementation "org.springframework.boot:spring-boot-starter-test"
-  testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc"
-  implementation 'org.springframework.boot:spring-boot-starter'
-  implementation 'org.springframework.boot:spring-boot-starter-actuator'
-  implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-  implementation 'org.springframework.boot:spring-boot-starter-mustache'
-  // implementation "org.springframework.boot:spring-boot-starter-security"
-  // implementation "org.springframework.boot:spring-boot-starter-hateoas"
-  // implementation "org.springframework.boot:spring-boot-starter-validation"
-  // implementation "org.springframework.boot:spring-boot-starter-mail"
-}
-
-test {
-  useJUnitPlatform()
-}
-
-java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(17)
+  dependencies {
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    switch (name) {
+      case 'app':
+        implementation project(":src:pl")
+        break
+        //   A P P   //
+        //  ---  ▲   //
+        //   │   │   //
+        //   ▼  ---  //
+      case 'pl':
+        api project(":src:dal")
+        break
+        //  ---  ▲   //
+        //   │   │   //
+        //   ▼  ---  //
+      case 'bll':
+        api project(":src:dal")
+        break
+        //  ---  ▲   //
+        //   │   │   //
+        //   ▼  ---  //
+      case 'dal': break
+      default: break
+    }
   }
-  sourceCompatibility = "17"
-}
 
-tasks.withType(JavaCompile).configureEach {
-  it.options.encoding = 'UTF-8'
-  it.options.release.set(17)
-}
-
-tasks.withType(GenerateModuleMetadata).configureEach {
-  enabled = false
-}
-
-license {
-  header = project.rootProject.file('license.md')
+  license {
+    header = project.rootProject.file('license.md')
+  }
 }
