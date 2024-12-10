@@ -30,15 +30,17 @@ import com.github.tmslpm.hsla.bll.exception.UserNotFoundException;
 import com.github.tmslpm.hsla.bll.mapper.UserMapper;
 import com.github.tmslpm.hsla.dal.entity.UserEntity;
 import com.github.tmslpm.hsla.dal.repository.IUserRepository;
+import com.github.tmslpm.hsla.dal.specification.UserSpecs;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Validated
@@ -69,7 +71,15 @@ public class UserService {
       .findAll()
       .stream()
       .map(userMapper::toDTO)
-      .collect(Collectors.toList());
+      .toList();
+  }
+
+  public List<UserDTO> findUserCreatedAfter(LocalDate date) {
+    return userRepository
+      .findAll(Specification.where(UserSpecs.createdAfter(date)))
+      .stream()
+      .map(userMapper::toDTO)
+      .toList();
   }
 
 }
