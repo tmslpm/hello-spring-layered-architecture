@@ -33,6 +33,4 @@ public interface UserMapper {
 
   UserDTO toDTO(UserEntity userEntity);
 
-  UserEntity toEntity(UserDTO userDTO);
-
 }

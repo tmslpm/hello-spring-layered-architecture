@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class IndexController {
   private final IndexAssembler assembler;
 
-  @GetMapping(value = {"index", "index.html", "home.html", "home"})
+  @GetMapping(value = {"index", "index.html", "home.html", "home", ""})
   public ResponseEntity<EntityModel<ApiSimpleMessageDTO>> index() {
     return ResponseEntity.ok(assembler.toModel("Hello World!"));
   }

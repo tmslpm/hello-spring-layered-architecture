@@ -20,6 +20,7 @@ mapstruct_version = "1.6.3"               # https://github.com/mapstruct/mapstru
 postgresql_version = "42.7.4"             # https://github.com/postgres/postgres
 h2db_version = "2.3.232"                  # https://github.com/h2database/h2database
 cadixdev_licenser_version = "0.6.1"       # https://github.com/CadixDev/licenser
+springdoc_openapi_version = "2.7.0"       # https://github.com/springdoc/springdoc-openapi
 
 [libraries] # Section Libraries ~ Maps aliases to GAV coordinates.
 jetbrains_annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains_annotations_version" }
@@ -33,6 +34,7 @@ mapstruct = { module = "org.mapstruct:mapstruct", version.ref = "mapstruct_versi
 mapstructprocessor = { module = "org.mapstruct:mapstruct-processor", version.ref = "mapstruct_version" }
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql_version" }
 h2db = { module = "com.h2database:h2", version.ref = "h2db_version" }
+springdoc_openapi = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc_openapi_version" }
 
 [bundles] # Section Bundles ~ Defines dependency bundles.
 junit = ["junit_jupiter_api", "junit_jupiter_params"]
