@@ -9,7 +9,7 @@
 [versions] # Section Versions ~ Declares version identifiers.
 javaToolchainVersion = "17"               # https://github.com/openjdk
 javaTargetCompatibility = "17"            #
-springboot_version = "3.4.0"              # https://github.com/spring-projects/spring-boot
+springboot_version = "3.4.1"              # https://github.com/spring-projects/spring-boot
 springcloud_version = "2023.0.2"          # https://github.com/spring-cloud
 spring_dep_management_version = "1.1.6"   # https://github.com/spring-gradle-plugins/dependency-management-plugin
 jetbrains_annotations_version = "26.0.1"  # https://github.com/JetBrains/java-annotations
