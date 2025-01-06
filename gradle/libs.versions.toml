@@ -20,7 +20,7 @@ mapstruct_version = "1.6.3"               # https://github.com/mapstruct/mapstru
 postgresql_version = "42.7.4"             # https://github.com/postgres/postgres
 h2db_version = "2.3.232"                  # https://github.com/h2database/h2database
 cadixdev_licenser_version = "0.6.1"       # https://github.com/CadixDev/licenser
-springdoc_openapi_version = "2.7.0"       # https://github.com/springdoc/springdoc-openapi
+springdoc_openapi_version = "2.8.0"       # https://github.com/springdoc/springdoc-openapi
 
 [libraries] # Section Libraries ~ Maps aliases to GAV coordinates.
 jetbrains_annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains_annotations_version" }
